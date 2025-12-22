@@ -20,13 +20,15 @@ export default function ProjectCard({
       onClick={onClick}
       className={
         `
-        w-90
-        min-h-90
+        w-full
+        max-w-md
+        sm:w-90
+        sm:min-h-90
         cursor-pointer
         rounded-2xl
         bg-white dark:bg-neutral-950
         border
-        p-6
+        p-5 sm:p-6
         flex flex-col
         transition-all duration-300 ease-out
         focus:outline-none
@@ -39,7 +41,7 @@ export default function ProjectCard({
       <h3
         className={
           `
-          text-xl font-semibold transition-colors
+          text-lg sm:text-xl font-semibold transition-colors
           ` +
           (isActive
             ? " text-[#22C55E] dark:text-[#4ADE80]"
@@ -49,12 +51,12 @@ export default function ProjectCard({
         {title}
       </h3>
 
-      <p className="mt-4 text-neutral-600 dark:text-neutral-400 leading-relaxed">
+      <p className="mt-4 text-sm sm:text-base text-neutral-600 dark:text-neutral-400 leading-relaxed">
         {description}
       </p>
 
       {/* Bottom row */}
-      <div className="mt-auto flex items-center justify-between pt-6">
+      <div className="mt-auto flex flex-col gap-3 pt-6 sm:flex-row sm:items-center sm:justify-between">
         <span className="text-sm text-neutral-500">
           {tech}
         </span>

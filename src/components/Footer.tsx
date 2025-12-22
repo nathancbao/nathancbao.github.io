@@ -5,7 +5,7 @@ export default function Footer() {
     <footer
       id="contact"
       className="
-        mt-48
+        mt-32 sm:mt-48
         border-t border-neutral-200 dark:border-neutral-800
         bg-white dark:bg-black
         transition-colors
@@ -14,18 +14,18 @@ export default function Footer() {
       <div
         className="
           mx-auto max-w-4xl
-          px-6 py-28
+          px-6 py-20 sm:py-28
           flex flex-col items-center
           text-center
         "
       >
         {/* Title */}
-        <h3 className="text-2xl font-semibold text-neutral-900 dark:text-neutral-100">
+        <h3 className="text-xl sm:text-2xl font-semibold text-neutral-900 dark:text-neutral-100">
           Connect
         </h3>
 
         {/* Icons */}
-        <div className="mt-10 flex gap-6">
+        <div className="mt-8 sm:mt-10 flex gap-4 sm:gap-6">
           <FooterIcon
             href="https://github.com/nathancbao"
             label="GitHub"

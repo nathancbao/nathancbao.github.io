@@ -54,21 +54,38 @@ export default function Projects() {
   return (
     <section
       id="projects"
-      className="scroll-mt-24 py-32 bg-white dark:bg-black"
+      className="scroll-mt-24 py-20 sm:py-32 bg-white dark:bg-black"
     >
       {/* Header */}
       <div className="mx-auto max-w-4xl px-6">
-        <h2 className="text-3xl font-semibold text-neutral-900 dark:text-neutral-100">
+        <h2 className="text-2xl sm:text-3xl font-semibold text-neutral-900 dark:text-neutral-100">
           Projects
         </h2>
-        <p className="mt-2 text-neutral-500 dark:text-neutral-400">
+        <p className="mt-2 hidden text-neutral-500 dark:text-neutral-400 sm:block">
           Use arrow keys to explore
+        </p>
+        <p className="mt-2 text-sm text-neutral-500 dark:text-neutral-400 sm:hidden">
+          Tap a card to view details
         </p>
       </div>
 
+      {/* Mobile list */}
+      <div className="mt-10 px-6 sm:hidden">
+        <div className="mx-auto flex max-w-md flex-col gap-6">
+          {PROJECTS.map((project, index) => (
+            <ProjectCard
+              key={project.title}
+              {...project}
+              isActive={index === activeIndex}
+              onClick={() => setActiveIndex(index)}
+            />
+          ))}
+        </div>
+      </div>
+
       {/* Fan */}
-      <div className="relative mt-20">
-        <div className="relative mx-auto h-105 w-105 flex items-center justify-center">
+      <div className="relative mt-12 hidden sm:block lg:mt-20">
+        <div className="relative mx-auto flex items-center justify-center sm:h-90 sm:w-90 lg:h-105 lg:w-105">
 
           {/* LEFT ARROW */}
           <button

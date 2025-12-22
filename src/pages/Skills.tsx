@@ -38,13 +38,13 @@ function SkillGroup({ title, skills }: SkillGroupProps) {
 
 export default function Skills() {
   return (
-    <section id="skills" className="scroll-mt-24 px-6 py-24 bg-white dark:bg-black transition-colors">
+    <section id="skills" className="scroll-mt-24 px-6 py-20 sm:py-24 bg-white dark:bg-black transition-colors">
       <div className="mx-auto max-w-4xl">
-        <h2 className="text-3xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">
+        <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">
           Skills
         </h2>
 
-        <div className="mt-12 grid gap-12 sm:grid-cols-2">
+        <div className="mt-10 grid gap-8 sm:mt-12 sm:gap-12 sm:grid-cols-2">
           <SkillGroup
             title="Languages"
             skills={["Python", "C++", "C", "JavaScript", "TypeScript", "SQL"]}

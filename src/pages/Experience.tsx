@@ -14,7 +14,7 @@ function ExperienceItem({
   isLast,
 }: ExperienceItemProps) {
   return (
-    <div className="group flex gap-6">
+    <div className="group flex gap-4 sm:gap-6">
       {/* Left timeline dot */}
       <div className="relative mt-2">
         <div
@@ -34,10 +34,10 @@ function ExperienceItem({
         </div>
 
       {/* Content */}
-      <div className="pb-10">
+      <div className="pb-8 sm:pb-10">
         <h3
             className="
-                text-lg font-semibold
+                text-base sm:text-lg font-semibold
                 text-neutral-900 dark:text-neutral-100
                 transition-colors
                 group-hover:text-[#22C55E]
@@ -62,9 +62,9 @@ function ExperienceItem({
 
 export default function Experience() {
   return (
-    <section id="experience" className="scroll-mt-24 px-6 py-28 bg-white dark:bg-black border-t border-neutral-100 dark:border-neutral-900">
+    <section id="experience" className="scroll-mt-24 px-6 py-20 sm:py-28 bg-white dark:bg-black border-t border-neutral-100 dark:border-neutral-900">
       <div className="mx-auto max-w-4xl">
-        <h2 className="text-3xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">
+        <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">
           Experience
         </h2>
 

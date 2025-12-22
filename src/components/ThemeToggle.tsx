@@ -9,9 +9,9 @@ export default function ThemeToggle() {
       onClick={toggleTheme}
       aria-label="Toggle theme"
       className="
-        fixed bottom-6 right-6 z-100
+        fixed bottom-4 right-4 z-100
         pointer-events-auto
-        flex h-12 w-12 items-center justify-center
+        flex h-10 w-10 items-center justify-center sm:h-12 sm:w-12
         rounded-full
         bg-white dark:bg-neutral-900
         border border-neutral-200 dark:border-neutral-700

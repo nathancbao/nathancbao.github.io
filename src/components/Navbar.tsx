@@ -5,7 +5,7 @@ export default function Navbar() {
       bg-white dark:bg-black
       transition-colors
     ">
-      <div className="mx-auto flex h-20 max-w-7xl items-center px-6">
+      <div className="mx-auto flex h-auto max-w-7xl flex-wrap items-center gap-4 px-6 py-4 sm:h-20 sm:py-0">
 
         {/* Logo */}
         <div className="
@@ -18,7 +18,7 @@ export default function Navbar() {
         </div>
 
         {/* Nav */}
-        <nav className="ml-auto flex items-center gap-8 text-sm">
+        <nav className="ml-auto flex flex-wrap items-center gap-4 text-xs sm:gap-8 sm:text-sm">
           {["Experience", "Projects", "Skills"].map((item) => (
             <a
               key={item}
