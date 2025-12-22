@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import ProjectCard from "../components/ProjectCard"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 
@@ -26,6 +26,7 @@ const PROJECTS = [
 
 export default function Projects() {
   const [activeIndex, setActiveIndex] = useState(1)
+  const listItemRefs = useRef<Array<HTMLDivElement | null>>([])
 
   function goPrev() {
     setActiveIndex((i) => (i - 1 + PROJECTS.length) % PROJECTS.length)
@@ -51,6 +52,74 @@ export default function Projects() {
     return () => window.removeEventListener("keydown", handleKeyDown)
   }, [])
 
+  useEffect(() => {
+    if (typeof window === "undefined") return
+
+    const media = window.matchMedia("(max-width: 639px)")
+    const items = listItemRefs.current.filter(Boolean) as HTMLDivElement[]
+    if (!items.length) return
+
+    let ticking = false
+    let listening = false
+
+    const updateActiveIndex = () => {
+      ticking = false
+      if (!media.matches) return
+
+      const anchor = window.innerHeight * 0.35
+      let closestIndex = 0
+      let closestDistance = Number.POSITIVE_INFINITY
+
+      items.forEach((item, index) => {
+        const rect = item.getBoundingClientRect()
+        const distance = Math.abs(rect.top - anchor)
+        if (distance < closestDistance) {
+          closestDistance = distance
+          closestIndex = index
+        }
+      })
+
+      setActiveIndex(closestIndex)
+    }
+
+    const handleScroll = () => {
+      if (ticking) return
+      ticking = true
+      window.requestAnimationFrame(updateActiveIndex)
+    }
+
+    const attachListeners = () => {
+      if (listening) return
+      listening = true
+      updateActiveIndex()
+      window.addEventListener("scroll", handleScroll, { passive: true })
+      window.addEventListener("resize", handleScroll)
+    }
+
+    const detachListeners = () => {
+      if (!listening) return
+      listening = false
+      window.removeEventListener("scroll", handleScroll)
+      window.removeEventListener("resize", handleScroll)
+    }
+
+    const handleMediaChange = () => {
+      if (media.matches) {
+        attachListeners()
+      } else {
+        detachListeners()
+      }
+    }
+
+    handleMediaChange()
+    media.addEventListener("change", handleMediaChange)
+
+    return () => {
+      detachListeners()
+      media.removeEventListener("change", handleMediaChange)
+    }
+  }, [])
+
   return (
     <section
       id="projects"
@@ -73,12 +142,18 @@ export default function Projects() {
       <div className="mt-10 px-6 sm:hidden">
         <div className="mx-auto flex max-w-md flex-col gap-6">
           {PROJECTS.map((project, index) => (
-            <ProjectCard
+            <div
               key={project.title}
-              {...project}
-              isActive={index === activeIndex}
-              onClick={() => setActiveIndex(index)}
-            />
+              ref={(el) => {
+                listItemRefs.current[index] = el
+              }}
+            >
+              <ProjectCard
+                {...project}
+                isActive={index === activeIndex}
+                onClick={() => setActiveIndex(index)}
+              />
+            </div>
           ))}
         </div>
       </div>
