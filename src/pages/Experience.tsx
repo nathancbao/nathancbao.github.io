@@ -47,23 +47,30 @@ function ExperienceItem({
       {/* Content */}
       <div className="pb-8 sm:pb-10">
         <h3
-            className="
-                text-base sm:text-lg font-semibold
-                text-neutral-900 dark:text-neutral-100
-                transition-colors
-                group-hover:text-[#22C55E]
-                dark:group-hover:text-[#4ADE80]
-            "
+          className={
+            "text-base sm:text-lg font-semibold transition-colors " +
+            (isActive
+              ? "text-[#22C55E] dark:text-[#4ADE80]"
+              : "text-neutral-900 dark:text-neutral-100") +
+            " group-hover:text-[#22C55E] dark:group-hover:text-[#4ADE80]"
+          }
         >
         {role}
         </h3>
         <p className="text-sm text-neutral-500 dark:text-neutral-400">
-        <span className="font-medium text-neutral-700 dark:text-neutral-300">
+          <span className="font-medium text-neutral-700 dark:text-neutral-300">
             {company}
-        </span>{" "}
-        · {period}
+          </span>{" "}
+          · {period}
         </p>
-        <p className="mt-3 max-w-xl text-neutral-600 dark:text-neutral-400">
+        <p
+          className={
+            "mt-3 max-w-xl transition-colors " +
+            (isActive
+              ? "text-neutral-800 dark:text-neutral-200"
+              : "text-neutral-600 dark:text-neutral-400")
+          }
+        >
           {description}
         </p>
       </div>
