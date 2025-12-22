@@ -47,7 +47,7 @@ function SkillGroup({ title, skills, isActive }: SkillGroupProps) {
 }
 
 export default function Skills() {
-  const [activeIndex, setActiveIndex] = useState(0)
+  const [activeIndices, setActiveIndices] = useState<number[]>([0])
   const groupRefs = useRef<Array<HTMLDivElement | null>>([])
 
   useEffect(() => {
@@ -59,19 +59,36 @@ export default function Skills() {
     const updateActiveIndex = () => {
       ticking = false
       const anchor = window.innerHeight * 0.35
-      let closestIndex = 0
-      let closestDistance = Number.POSITIVE_INFINITY
+      const rows = new Map<number, number[]>()
 
       items.forEach((item, index) => {
-        const rect = item.getBoundingClientRect()
-        const distance = Math.abs(rect.top - anchor)
-        if (distance < closestDistance) {
-          closestDistance = distance
-          closestIndex = index
+        const rowKey = Math.round(item.offsetTop)
+        const row = rows.get(rowKey)
+        if (row) {
+          row.push(index)
+        } else {
+          rows.set(rowKey, [index])
         }
       })
 
-      setActiveIndex(closestIndex)
+      let closestRow: number[] = []
+      let closestDistance = Number.POSITIVE_INFINITY
+
+      rows.forEach((rowIndices) => {
+        const rowTopSum = rowIndices.reduce((sum, index) => {
+          return sum + items[index].getBoundingClientRect().top
+        }, 0)
+        const rowTop = rowTopSum / rowIndices.length
+        const distance = Math.abs(rowTop - anchor)
+        if (distance < closestDistance) {
+          closestDistance = distance
+          closestRow = rowIndices
+        }
+      })
+
+      if (closestRow.length) {
+        setActiveIndices(closestRow)
+      }
     }
 
     const handleScroll = () => {
@@ -106,7 +123,7 @@ export default function Skills() {
             <SkillGroup
               title="Languages"
               skills={["Python", "C++", "C", "JavaScript", "TypeScript", "SQL"]}
-              isActive={activeIndex === 0}
+              isActive={activeIndices.includes(0)}
             />
           </div>
 
@@ -125,7 +142,7 @@ export default function Skills() {
                 "Git",
                 "Docker",
               ]}
-              isActive={activeIndex === 1}
+              isActive={activeIndices.includes(1)}
             />
           </div>
 
@@ -143,7 +160,7 @@ export default function Skills() {
                 "Networking",
                 "Machine Learning",
               ]}
-              isActive={activeIndex === 2}
+              isActive={activeIndices.includes(2)}
             />
           </div>
 
@@ -155,7 +172,7 @@ export default function Skills() {
             <SkillGroup
               title="Databases"
               skills={["PostgreSQL", "SQLite", "Supabase"]}
-              isActive={activeIndex === 3}
+              isActive={activeIndices.includes(3)}
             />
           </div>
         </div>
