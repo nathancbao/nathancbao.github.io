@@ -80,6 +80,7 @@ function ExperienceItem({
 
 export default function Experience() {
   const [activeIndex, setActiveIndex] = useState(0)
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
   const itemRefs = useRef<Array<HTMLDivElement | null>>([])
 
   useEffect(() => {
@@ -134,29 +135,33 @@ export default function Experience() {
             ref={(el) => {
               itemRefs.current[0] = el
             }}
+            onMouseEnter={() => setHoveredIndex(0)}
+            onMouseLeave={() => setHoveredIndex(null)}
           >
-          <ExperienceItem
-            role="Software Engineering Intern"
-            company="AI Nomis"
-            period="Summer 2024"
-            description="Worked on backend infrastructure for AI-driven workflow tools, contributing to early-stage model integration and system design decisions."
-            isActive={activeIndex === 0}
-          />
+            <ExperienceItem
+              role="Software Engineering Intern"
+              company="AI Nomis"
+              period="Summer 2024"
+              description="Worked on backend infrastructure for AI-driven workflow tools, contributing to early-stage model integration and system design decisions."
+              isActive={(hoveredIndex ?? activeIndex) === 0}
+            />
           </div>
 
           <div
             ref={(el) => {
               itemRefs.current[1] = el
             }}
+            onMouseEnter={() => setHoveredIndex(1)}
+            onMouseLeave={() => setHoveredIndex(null)}
           >
-          <ExperienceItem
-            role="Student Developer"
-            company="UC Davis"
-            period="2023 – Present"
-            description="Built and maintained multiple course and personal projects in systems, machine learning, and frontend development."
-            isLast
-            isActive={activeIndex === 1}
-          />
+            <ExperienceItem
+              role="Student Developer"
+              company="UC Davis"
+              period="2023 – Present"
+              description="Built and maintained multiple course and personal projects in systems, machine learning, and frontend development."
+              isLast
+              isActive={(hoveredIndex ?? activeIndex) === 1}
+            />
           </div>
         </div>
       </div>
