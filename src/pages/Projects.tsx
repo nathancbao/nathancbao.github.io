@@ -26,7 +26,6 @@ const PROJECTS = [
 
 export default function Projects() {
   const [activeIndex, setActiveIndex] = useState(1)
-  const sectionRef = useRef<HTMLElement | null>(null)
   const listItemRefs = useRef<Array<HTMLDivElement | null>>([])
 
   function goPrev() {
@@ -56,47 +55,31 @@ export default function Projects() {
   useEffect(() => {
     if (typeof window === "undefined") return
 
+    const media = window.matchMedia("(max-width: 639px)")
     const items = listItemRefs.current.filter(Boolean) as HTMLDivElement[]
     if (!items.length) return
 
     let ticking = false
+    let listening = false
 
     const updateActiveIndex = () => {
       ticking = false
+      if (!media.matches) return
+
       const anchor = window.innerHeight * 0.35
-      const visibleItems = items
-        .map((item, index) => ({ item, index }))
-        .filter(({ item }) => item.offsetParent !== null)
+      let closestIndex = 0
+      let closestDistance = Number.POSITIVE_INFINITY
 
-      if (visibleItems.length) {
-        let closestIndex = visibleItems[0].index
-        let closestDistance = Number.POSITIVE_INFINITY
+      items.forEach((item, index) => {
+        const rect = item.getBoundingClientRect()
+        const distance = Math.abs(rect.top - anchor)
+        if (distance < closestDistance) {
+          closestDistance = distance
+          closestIndex = index
+        }
+      })
 
-        visibleItems.forEach(({ item, index }) => {
-          const rect = item.getBoundingClientRect()
-          const distance = Math.abs(rect.top - anchor)
-          if (distance < closestDistance) {
-            closestDistance = distance
-            closestIndex = index
-          }
-        })
-
-        setActiveIndex(closestIndex)
-        return
-      }
-
-      const section = sectionRef.current
-      if (!section) return
-      const rect = section.getBoundingClientRect()
-      if (rect.bottom < 0 || rect.top > window.innerHeight) return
-
-      const viewportCenter = window.innerHeight * 0.5
-      const progress = Math.min(
-        1,
-        Math.max(0, (viewportCenter - rect.top) / rect.height)
-      )
-      const index = Math.round(progress * (PROJECTS.length - 1))
-      setActiveIndex(index)
+      setActiveIndex(closestIndex)
     }
 
     const handleScroll = () => {
@@ -105,20 +88,41 @@ export default function Projects() {
       window.requestAnimationFrame(updateActiveIndex)
     }
 
-    updateActiveIndex()
-    window.addEventListener("scroll", handleScroll, { passive: true })
-    window.addEventListener("resize", handleScroll)
+    const attachListeners = () => {
+      if (listening) return
+      listening = true
+      updateActiveIndex()
+      window.addEventListener("scroll", handleScroll, { passive: true })
+      window.addEventListener("resize", handleScroll)
+    }
 
-    return () => {
+    const detachListeners = () => {
+      if (!listening) return
+      listening = false
       window.removeEventListener("scroll", handleScroll)
       window.removeEventListener("resize", handleScroll)
+    }
+
+    const handleMediaChange = () => {
+      if (media.matches) {
+        attachListeners()
+      } else {
+        detachListeners()
+      }
+    }
+
+    handleMediaChange()
+    media.addEventListener("change", handleMediaChange)
+
+    return () => {
+      detachListeners()
+      media.removeEventListener("change", handleMediaChange)
     }
   }, [])
 
   return (
     <section
       id="projects"
-      ref={sectionRef}
       className="scroll-mt-24 py-20 sm:py-32 bg-white dark:bg-black"
     >
       {/* Header */}
