@@ -35,12 +35,14 @@ function ExperienceItem({
         />
 
         {!isLast && (
-          <div className="
+          <div
+            className="
             absolute left-1/2 top-4 bottom-0
             w-px -translate-x-1/2
             bg-neutral-300 dark:bg-neutral-700
             z-0
-          " />
+          "
+          />
         )}
       </div>
 
@@ -55,7 +57,7 @@ function ExperienceItem({
             " group-hover:text-[#22C55E] dark:group-hover:text-[#4ADE80]"
           }
         >
-        {role}
+          {role}
         </h3>
         <p className="text-sm text-neutral-500 dark:text-neutral-400">
           <span className="font-medium text-neutral-700 dark:text-neutral-300">
@@ -124,7 +126,10 @@ export default function Experience() {
   }, [])
 
   return (
-    <section id="experience" className="scroll-mt-24 px-6 py-20 sm:py-28 bg-white dark:bg-black border-t border-neutral-100 dark:border-neutral-900">
+    <section
+      id="experience"
+      className="scroll-mt-24 px-6 py-20 sm:py-28 bg-white dark:bg-black border-t border-neutral-100 dark:border-neutral-900"
+    >
       <div className="mx-auto max-w-4xl">
         <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">
           Experience

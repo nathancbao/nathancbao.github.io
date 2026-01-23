@@ -1,19 +1,22 @@
 export default function Navbar() {
   return (
-    <header className="
+    <header
+      className="
       top-0 z-50 w-full
       bg-white dark:bg-black
       transition-colors
-    ">
+    "
+    >
       <div className="mx-auto flex h-auto max-w-7xl flex-wrap items-center gap-4 px-6 py-4 sm:h-20 sm:py-0">
-
         {/* Logo */}
-        <div className="
+        <div
+          className="
           font-['Space Grotesk']
           font-semibold
           tracking-[-0.035em]
           text-neutral-900 dark:text-neutral-100
-        ">
+        "
+        >
           NB
         </div>
 

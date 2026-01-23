@@ -26,10 +26,7 @@ export default function Footer() {
 
         {/* Icons */}
         <div className="mt-8 sm:mt-10 flex gap-4 sm:gap-6">
-          <FooterIcon
-            href="https://github.com/nathancbao"
-            label="GitHub"
-          >
+          <FooterIcon href="https://github.com/nathancbao" label="GitHub">
             <Github className="h-5 w-5" />
           </FooterIcon>
 
@@ -40,16 +37,11 @@ export default function Footer() {
             <Linkedin className="h-5 w-5" />
           </FooterIcon>
 
-          <FooterIcon
-            href="mailto:YOUR_EMAIL@gmail.com"
-            label="Email"
-          >
+          <FooterIcon href="mailto:YOUR_EMAIL@gmail.com" label="Email">
             <Mail className="h-5 w-5" />
           </FooterIcon>
 
-          <FooterIcon 
-            href="/Nathan_Bao_Resume.pdf" 
-            label="Resume">
+          <FooterIcon href="/Nathan_Bao_Resume.pdf" label="Resume">
             <FileText className="h-5 w-5" />
           </FooterIcon>
         </div>

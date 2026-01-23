@@ -42,9 +42,7 @@ export default function Projects() {
         setActiveIndex((i) => (i + 1) % PROJECTS.length)
       }
       if (e.key === "ArrowLeft") {
-        setActiveIndex((i) =>
-          (i - 1 + PROJECTS.length) % PROJECTS.length
-        )
+        setActiveIndex((i) => (i - 1 + PROJECTS.length) % PROJECTS.length)
       }
     }
 
@@ -161,7 +159,6 @@ export default function Projects() {
       {/* Fan */}
       <div className="relative mt-12 hidden sm:block lg:mt-20">
         <div className="relative mx-auto flex items-center justify-center sm:h-90 sm:w-90 lg:h-105 lg:w-105">
-
           {/* LEFT ARROW */}
           <button
             onClick={goPrev}
@@ -252,7 +249,6 @@ export default function Projects() {
           >
             <ChevronRight className="h-5 w-5" />
           </button>
-
         </div>
       </div>
     </section>

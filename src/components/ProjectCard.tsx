@@ -57,9 +57,7 @@ export default function ProjectCard({
 
       {/* Bottom row */}
       <div className="mt-auto flex flex-col gap-3 pt-6 sm:flex-row sm:items-center sm:justify-between">
-        <span className="text-sm text-neutral-500">
-          {tech}
-        </span>
+        <span className="text-sm text-neutral-500">{tech}</span>
 
         {githubUrl && (
           <a

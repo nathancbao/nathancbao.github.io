@@ -5,8 +5,6 @@ import Experience from "./pages/Experience"
 import Skills from "./pages/Skills"
 import Footer from "./components/Footer"
 
-
-
 export default function App() {
   return (
     <>
@@ -22,8 +20,8 @@ export default function App() {
             </h1>
 
             <p className="mt-4 sm:mt-6 text-base sm:text-lg text-neutral-600 dark:text-neutral-400">
-              Computer Science student focused on building clean,
-              reliable software with thoughtful design.
+              Computer Science student focused on building clean, reliable
+              software with thoughtful design.
             </p>
           </div>
         </section>

@@ -12,9 +12,7 @@ function SkillGroup({ title, skills, isActive }: SkillGroupProps) {
       <h3
         className={
           "text-sm font-semibold uppercase tracking-wide transition-colors " +
-          (isActive
-            ? "text-[#22C55E] dark:text-[#4ADE80]"
-            : "text-neutral-500")
+          (isActive ? "text-[#22C55E] dark:text-[#4ADE80]" : "text-neutral-500")
         }
       >
         {title}
@@ -37,9 +35,9 @@ function SkillGroup({ title, skills, isActive }: SkillGroupProps) {
                 hover:shadow-[0_0_0_3px_rgba(34,197,94,0.12)]
                 dark:hover:shadow-[0_0_0_3px_rgba(74,222,128,0.12)]
             "
-            >
-                {skill}
-            </li>
+          >
+            {skill}
+          </li>
         ))}
       </ul>
     </div>
@@ -108,7 +106,10 @@ export default function Skills() {
   }, [])
 
   return (
-    <section id="skills" className="scroll-mt-24 px-6 py-20 sm:py-24 bg-white dark:bg-black transition-colors">
+    <section
+      id="skills"
+      className="scroll-mt-24 px-6 py-20 sm:py-24 bg-white dark:bg-black transition-colors"
+    >
       <div className="mx-auto max-w-4xl">
         <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">
           Skills
