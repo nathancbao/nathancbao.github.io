@@ -31,13 +31,13 @@ export default function Footer() {
           </FooterIcon>
 
           <FooterIcon
-            href="https://linkedin.com/in/YOUR_LINKEDIN"
+            href="https://www.linkedin.com/in/nathancbao/"
             label="LinkedIn"
           >
             <Linkedin className="h-5 w-5" />
           </FooterIcon>
 
-          <FooterIcon href="mailto:YOUR_EMAIL@gmail.com" label="Email">
+          <FooterIcon href="mailto:nathanbao@gmail.com" label="Email">
             <Mail className="h-5 w-5" />
           </FooterIcon>
 
