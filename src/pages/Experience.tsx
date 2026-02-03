@@ -93,19 +93,21 @@ export default function Experience() {
 
     const updateActiveIndex = () => {
       ticking = false
-      const anchor = window.innerHeight * 0.35
+      const anchor = window.innerHeight * 0.5 // Adjusted anchor point for better highlighting
       let closestIndex = 0
       let closestDistance = Number.POSITIVE_INFINITY
 
       items.forEach((item, index) => {
         const rect = item.getBoundingClientRect()
         const distance = Math.abs(rect.top - anchor)
+        console.log(`Item ${index}: distance = ${distance}`) // Debug log
         if (distance < closestDistance) {
           closestDistance = distance
           closestIndex = index
         }
       })
 
+      console.log(`Active index updated to: ${closestIndex}`) // Debug log
       setActiveIndex(closestIndex)
     }
 
@@ -144,14 +146,13 @@ export default function Experience() {
             onMouseLeave={() => setHoveredIndex(null)}
           >
             <ExperienceItem
-              role="Software Engineering Intern"
-              company="AI Nomis"
-              period="Summer 2024"
-              description="Worked on backend infrastructure for AI-driven workflow tools, contributing to early-stage model integration and system design decisions."
+              role="Machine Learning Developer"
+              company="AI Student Collective at Davis"
+              period="Oct 2025 - Present"
+              description="Engineering ML-driven trading models on Kalshi, applying supervised learning, time-series forecasting, and feature engineering to predict event probabilities and guide automated trades"
               isActive={(hoveredIndex ?? activeIndex) === 0}
             />
           </div>
-
           <div
             ref={(el) => {
               itemRefs.current[1] = el
@@ -160,12 +161,43 @@ export default function Experience() {
             onMouseLeave={() => setHoveredIndex(null)}
           >
             <ExperienceItem
-              role="Student Developer"
-              company="UC Davis"
-              period="2023 – Present"
-              description="Built and maintained multiple course and personal projects in systems, machine learning, and frontend development."
-              isLast
+              role="Backend Developer"
+              company="Include at Davis"
+              period="Sep 2024 - Oct 2025"
+              description="Constructed scalable, relational NoSQL database schemas for an e-commerce platform serving local businesses, enhancing data integrity, query efficiency, and system scalability. Developed and maintained high-performance database functions and RESTful API endpoints, enabling real-time user interactions and seamless integration between frontend and backend services"
               isActive={(hoveredIndex ?? activeIndex) === 1}
+            />
+          </div>
+          <div
+            ref={(el) => {
+              itemRefs.current[2] = el
+            }}
+            onMouseEnter={() => setHoveredIndex(2)}
+            onMouseLeave={() => setHoveredIndex(null)}
+          >
+            <ExperienceItem
+              role="Software Engineering Intern"
+              company="AI Nomis"
+              period="July 2024 - Sep 2024"
+              description="Integrated and customized eight open-source AI models on RunPod with cloud GPU computing and linking them via scalable TypeScript/Python APIs to power dynamic AI cards/chatbots. Architected and deployed a full-stack platform enabling users to browse, test, and deploy production-ready AI tools, including a real-time chatbot supporting multiple LLMs. Built a modular, custom AI builder interface for users to visually chain and remix models, connecting inputs, outputs, and logic in a scratch-style system for custom automations"
+              isActive={(hoveredIndex ?? activeIndex) === 2}
+            />
+          </div>
+
+          <div
+            ref={(el) => {
+              itemRefs.current[3] = el
+            }}
+            onMouseEnter={() => setHoveredIndex(3)}
+            onMouseLeave={() => setHoveredIndex(null)}
+          >
+            <ExperienceItem
+              role="Software Developer"
+              company="Codelab Open Source"
+              period="Feb 2024 - July 2024"
+              description="Collaborated with a team to develop a fully customizable charting library using Ruby on Rails, HTML, and CSS, adding dynamic color palettes, hover interactions, and theme-switching for improved UI/UX. Learned the process of contributing to open-source"
+              isLast
+              isActive={(hoveredIndex ?? activeIndex) === 3}
             />
           </div>
         </div>
