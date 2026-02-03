@@ -4,23 +4,31 @@ import { ChevronLeft, ChevronRight } from "lucide-react"
 
 const PROJECTS = [
   {
-    title: "Task Management System",
+    title: "Orbit (Ongoing)",
     description:
       "A clean RESTful backend for managing projects and tasks with authentication.",
     tech: "FastAPI · PostgreSQL · JWT",
-    githubUrl: "https://github.com/nathancbao/nathancbao.github.io",
+    githubUrl: "https://github.com/nathancbao/Orbit",
   },
   {
-    title: "Gesture Control Interface",
+    title: "Hand-Computer Control Interface",
     description:
-      "Hand gesture recognition to control desktop input using computer vision.",
-    tech: "Python · MediaPipe · PyTorch",
+      "Developed a real-time hand-gesture computer control system using MediaPipe and OpenCV that translates tracked hand landmarks into mouse actions (relative and absolute cursor modes), supported by a custom dataset of 180 samples and an MLP model compressing 42 features into 6 gestures.",
+    tech: "Python · MediaPipe · OpenCV ",
+    githubUrl: "https://github.com/nathancbao/Hand-Computer-Control-Interface",
   },
   {
-    title: "LeetCode Tracker",
+    title: "Interconnect",
     description:
-      "Tracks coding progress and visualizes problem-solving trends.",
-    tech: "React · Node · SQL",
+      "Built a full-stack React web app to connect international and bilingual students, implementing Firebase authentication, real-time database, and secure private messaging.",
+    tech: "React · Vite · Firebase",
+    githubURL: "https://github.com/nathancbao/InterConnect",
+  },
+  {
+    title: "Guandan Multiplayer Game",
+    description:
+      "Developing and implementing a full-stack browser-based popular Chinese card game with Go concurrency and WebSocket protocols for matchmaking, game logic, and latency.",
+    tech: "HTML · CSS · JS · Golang",
   },
 ]
 
