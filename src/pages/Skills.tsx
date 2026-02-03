@@ -123,7 +123,18 @@ export default function Skills() {
           >
             <SkillGroup
               title="Languages"
-              skills={["Python", "C++", "C", "JavaScript", "TypeScript", "SQL"]}
+              skills={[
+                "Python",
+                "C++",
+                "Java",
+                "C",
+                "Go",
+                "HTML",
+                "CSS",
+                "JavaScript",
+                "TypeScript",
+                "SQL",
+              ]}
               isActive={activeIndices.includes(0)}
             />
           </div>
@@ -138,6 +149,7 @@ export default function Skills() {
               skills={[
                 "React",
                 "Node.js",
+                "Next.js",
                 "FastAPI",
                 "Tailwind CSS",
                 "Git",
@@ -158,7 +170,6 @@ export default function Skills() {
                 "Operating Systems",
                 "File Systems",
                 "Concurrency",
-                "Networking",
                 "Machine Learning",
               ]}
               isActive={activeIndices.includes(2)}
@@ -172,7 +183,7 @@ export default function Skills() {
           >
             <SkillGroup
               title="Databases"
-              skills={["PostgreSQL", "SQLite", "Supabase"]}
+              skills={["SQL", "Supabase"]}
               isActive={activeIndices.includes(3)}
             />
           </div>
