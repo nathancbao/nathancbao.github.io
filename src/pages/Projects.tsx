@@ -22,7 +22,7 @@ const PROJECTS = [
     description:
       "Built a full-stack React web app to connect international and bilingual students, implementing Firebase authentication, real-time database, and secure private messaging.",
     tech: "React · Vite · Firebase",
-    githubURL: "https://github.com/nathancbao/InterConnect",
+    githubUrl: "https://github.com/nathancbao/InterConnect",
   },
   {
     title: "Guandan Multiplayer Game",
