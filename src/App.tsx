@@ -20,8 +20,13 @@ export default function App() {
             </h1>
 
             <p className="mt-4 sm:mt-6 text-base sm:text-lg text-neutral-600 dark:text-neutral-400">
-              Computer Science student focused on building clean, reliable
-              software with thoughtful design.
+              Hi, I’m Nathan — a computer science student who enjoys building
+              software that’s meant to be used in the real world. I’ve worked
+              across full-stack development, backend systems, and machine
+              learning, with a focus on writing clean, maintainable code that
+              scales. I like taking ideas from concept to deployment and
+              improving them through iteration, performance tuning, and user
+              feedback.
             </p>
           </div>
         </section>
