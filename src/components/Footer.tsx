@@ -1,88 +1,166 @@
-import { Github, Linkedin, Mail, FileText } from "lucide-react"
+const SOCIAL_LINKS = [
+  { label: "GitHub", href: "https://github.com/nathancbao" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/nathancbao/" },
+  { label: "Email", href: "mailto:ncbao@usc.edu" },
+]
 
 export default function Footer() {
   return (
     <footer
       id="contact"
-      className="
-        mt-32 sm:mt-48
-        border-t border-neutral-200 dark:border-neutral-800
-        bg-white dark:bg-black
-        transition-colors
-      "
+      style={{
+        background: "#05060d",
+        borderTop: "1px solid #1c2440",
+        padding: "64px clamp(24px,5vw,80px)",
+      }}
     >
-      <div
-        className="
-          mx-auto max-w-4xl
-          px-6 py-20 sm:py-28
-          flex flex-col items-center
-          text-center
-        "
-      >
-        {/* Title */}
-        <h3 className="text-xl sm:text-2xl font-semibold text-neutral-900 dark:text-neutral-100">
-          Connect
-        </h3>
+      <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+            alignItems: "center",
+            gap: "40px",
+            marginBottom: "48px",
+          }}
+        >
+          {/* Logo + tagline */}
+          <div>
+            <div
+              className="font-orbitron"
+              style={{
+                fontSize: "20px",
+                fontWeight: 700,
+                color: "#f4f7ff",
+                letterSpacing: "1px",
+                marginBottom: "10px",
+              }}
+            >
+              <span style={{ color: "#00e5ff" }}>&lt;</span>NB
+              <span style={{ color: "#00e5ff" }}>/&gt;</span>
+            </div>
+            <p style={{ fontSize: "13px", color: "#657493", lineHeight: 1.7 }}>
+              Building software.
+              <br />
+              One clean commit at a time.
+            </p>
+          </div>
 
-        {/* Icons */}
-        <div className="mt-8 sm:mt-10 flex gap-4 sm:gap-6">
-          <FooterIcon href="https://github.com/nathancbao" label="GitHub">
-            <Github className="h-5 w-5" />
-          </FooterIcon>
+          {/* Email */}
+          <div style={{ textAlign: "center" }}>
+            <div
+              style={{
+                fontSize: "9px",
+                fontWeight: 700,
+                color: "#596781",
+                letterSpacing: "4px",
+                textTransform: "uppercase",
+                marginBottom: "12px",
+              }}
+            >
+              GET IN TOUCH
+            </div>
+            <a
+              href="mailto:ncbao@usc.edu"
+              style={{
+                fontSize: "16px",
+                fontWeight: 600,
+                color: "#00e5ff",
+                textDecoration: "none",
+                transition: "text-shadow 0.2s",
+              }}
+              onMouseEnter={(e) =>
+                ((e.currentTarget as HTMLAnchorElement).style.textShadow =
+                  "0 0 18px rgba(0,229,255,0.65)")
+              }
+              onMouseLeave={(e) =>
+                ((e.currentTarget as HTMLAnchorElement).style.textShadow =
+                  "none")
+              }
+            >
+              ncbao@usc.edu
+            </a>
+          </div>
 
-          <FooterIcon
-            href="https://www.linkedin.com/in/nathancbao/"
-            label="LinkedIn"
+          {/* Social links */}
+          <div
+            style={{
+              display: "flex",
+              gap: "12px",
+              justifyContent: "flex-end",
+              flexWrap: "wrap",
+            }}
           >
-            <Linkedin className="h-5 w-5" />
-          </FooterIcon>
-
-          <FooterIcon href="mailto:nathanbao@gmail.com" label="Email">
-            <Mail className="h-5 w-5" />
-          </FooterIcon>
-
-          <FooterIcon href="/Nathan_Bao_Resume.pdf" label="Resume">
-            <FileText className="h-5 w-5" />
-          </FooterIcon>
+            {SOCIAL_LINKS.map(({ label, href }) => (
+              <SocialLink key={label} href={href} label={label} />
+            ))}
+          </div>
         </div>
 
-        {/* Copyright */}
-        <p className="mt-12 text-sm text-neutral-500">
-          © {new Date().getFullYear()} Nathan Bao. All rights reserved.
-        </p>
+        <div
+          style={{
+            borderTop: "1px solid #1c2440",
+            paddingTop: "24px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            flexWrap: "wrap",
+            gap: "12px",
+          }}
+        >
+          <span
+            style={{
+              fontSize: "11px",
+              color: "#4e5b78",
+              fontFamily: "'Courier New', monospace",
+            }}
+          >
+            © {new Date().getFullYear()} NATHAN BAO. ALL RIGHTS RESERVED.
+          </span>
+          <span
+            style={{
+              fontSize: "11px",
+              color: "#4e5b78",
+              fontFamily: "'Courier New', monospace",
+            }}
+          >
+            DESIGNED &amp; BUILT BY NATHAN BAO.
+          </span>
+        </div>
       </div>
     </footer>
   )
 }
 
-function FooterIcon({
-  href,
-  label,
-  children,
-}: {
-  href: string
-  label: string
-  children: React.ReactNode
-}) {
+function SocialLink({ href, label }: { href: string; label: string }) {
   return (
     <a
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label={label}
-      className="
-        flex h-12 w-12 items-center justify-center
-        rounded-xl
-        border border-neutral-200 dark:border-neutral-700
-        text-neutral-600 dark:text-neutral-400
-        transition-all duration-200
-        hover:-translate-y-0.5
-        hover:text-[#22C55E] dark:hover:text-[#4ADE80]
-        hover:border-[#22C55E]/40 dark:hover:border-[#4ADE80]/40
-        focus:outline-none focus:ring-2 focus:ring-[#22C55E]/30 dark:focus:ring-[#4ADE80]/30
-      "
+      style={{
+        fontSize: "10px",
+        fontWeight: 700,
+        color: "#657493",
+        border: "1px solid #1c2440",
+        padding: "10px 18px",
+        letterSpacing: "3px",
+        textTransform: "uppercase",
+        textDecoration: "none",
+        transition: "all 0.2s",
+      }}
+      onMouseEnter={(e) => {
+        const el = e.currentTarget as HTMLAnchorElement
+        el.style.color = "#00e5ff"
+        el.style.borderColor = "rgba(0,229,255,0.3)"
+      }}
+      onMouseLeave={(e) => {
+        const el = e.currentTarget as HTMLAnchorElement
+        el.style.color = "#657493"
+        el.style.borderColor = "#1c2440"
+      }}
     >
-      {children}
+      {label}
     </a>
   )
 }

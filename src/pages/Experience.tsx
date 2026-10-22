@@ -1,84 +1,55 @@
 import { useEffect, useRef, useState } from "react"
 
-type ExperienceItemProps = {
-  role: string
-  company: string
-  period: string
-  description: string
-  isLast?: boolean
-  isActive?: boolean
-}
-
-function ExperienceItem({
-  role,
-  company,
-  period,
-  description,
-  isLast,
-  isActive,
-}: ExperienceItemProps) {
-  return (
-    <div className="group flex gap-4 sm:gap-6">
-      {/* Left timeline dot */}
-      <div className="relative mt-2">
-        <div
-          className={`
-            relative z-10
-            h-2.5 w-2.5 rounded-full
-            transition-all
-            ${
-              isActive
-                ? "bg-[#22C55E] dark:bg-[#4ADE80] ring-4 ring-[#22C55E]/20 dark:ring-[#4ADE80]/20"
-                : "bg-neutral-400 dark:bg-neutral-600"
-            }
-          `}
-        />
-
-        {!isLast && (
-          <div
-            className="
-            absolute left-1/2 top-4 bottom-0
-            w-px -translate-x-1/2
-            bg-neutral-300 dark:bg-neutral-700
-            z-0
-          "
-          />
-        )}
-      </div>
-
-      {/* Content */}
-      <div className="pb-8 sm:pb-10">
-        <h3
-          className={
-            "text-base sm:text-lg font-semibold transition-colors " +
-            (isActive
-              ? "text-[#22C55E] dark:text-[#4ADE80]"
-              : "text-neutral-900 dark:text-neutral-100") +
-            " group-hover:text-[#22C55E] dark:group-hover:text-[#4ADE80]"
-          }
-        >
-          {role}
-        </h3>
-        <p className="text-sm text-neutral-500 dark:text-neutral-400">
-          <span className="font-medium text-neutral-700 dark:text-neutral-300">
-            {company}
-          </span>{" "}
-          · {period}
-        </p>
-        <p
-          className={
-            "mt-3 max-w-xl transition-colors " +
-            (isActive
-              ? "text-neutral-800 dark:text-neutral-200"
-              : "text-neutral-600 dark:text-neutral-400")
-          }
-        >
-          {description}
-        </p>
-      </div>
-    </div>
-  )
-}
+const JOBS = [
+  {
+    period: "JUN 2026 – AUG 2026",
+    role: "Business Technology Intern",
+    company: "ZS Associates · New York, NY",
+    companyColor: "#00e5ff",
+    description:
+      "Built an advanced Salesforce search workflow (Apex, LWC) for a Fortune 100 client. Profiled 450K+ product records across two legacy systems and developed Python/SQL tooling to validate 500+ field mappings from eight systems into a unified data model.",
+  },
+  {
+    period: "MAR 2026 – JUN 2026",
+    role: "Mobile Developer",
+    company: "Orbit",
+    companyColor: "#9b59ff",
+    description:
+      "Built an iOS social platform in SwiftUI with a Flask backend on Google App Engine, including JWT auth and .edu verification. Developed a hybrid recommendation engine using LightFM/WARP, semantic embeddings, TF-IDF, and time-decayed behavioral signals.",
+  },
+  {
+    period: "OCT 2025 – PRESENT",
+    role: "Machine Learning Developer",
+    company: "AI Student Collective at Davis",
+    companyColor: "#00e5ff",
+    description:
+      "Engineering ML-driven trading models on Kalshi, applying supervised learning, time-series forecasting, and feature engineering to predict event probabilities and guide automated trades.",
+  },
+  {
+    period: "SEP 2024 – OCT 2025",
+    role: "Backend Developer",
+    company: "Include at Davis",
+    companyColor: "#9b59ff",
+    description:
+      "Designed NoSQL schemas and REST APIs for an e-commerce platform serving local businesses, improving data integrity, query performance, and real-time frontend integration.",
+  },
+  {
+    period: "JUL 2024 – SEP 2024",
+    role: "Software Engineer Intern",
+    company: "AI Nomis · Seoul, South Korea",
+    companyColor: "#9b59ff",
+    description:
+      "Integrated eight open-source AI models on RunPod through TypeScript/Python APIs. Built a full-stack platform for browsing, testing, and deploying AI tools, including a real-time multi-LLM chatbot.",
+  },
+  {
+    period: "FEB 2024 – JUL 2024",
+    role: "Software Developer",
+    company: "Codelab Open Source",
+    companyColor: "#7888a8",
+    description:
+      "Contributed to a customizable charting library in Ruby on Rails, HTML, and CSS, adding dynamic palettes, hover states, and theme switching.",
+  },
+]
 
 export default function Experience() {
   const [activeIndex, setActiveIndex] = useState(0)
@@ -91,117 +62,223 @@ export default function Experience() {
 
     let ticking = false
 
-    const updateActiveIndex = () => {
+    const updateActive = () => {
       ticking = false
-      const anchor = window.innerHeight * 0.5 // Adjusted anchor point for better highlighting
+      const anchor = window.innerHeight * 0.45
       let closestIndex = 0
-      let closestDistance = Number.POSITIVE_INFINITY
+      let closestDist = Infinity
 
-      items.forEach((item, index) => {
+      items.forEach((item, i) => {
         const rect = item.getBoundingClientRect()
-        const distance = Math.abs(rect.top - anchor)
-        console.log(`Item ${index}: distance = ${distance}`) // Debug log
-        if (distance < closestDistance) {
-          closestDistance = distance
-          closestIndex = index
+        const dist = Math.abs(rect.top - anchor)
+        if (dist < closestDist) {
+          closestDist = dist
+          closestIndex = i
         }
       })
 
-      console.log(`Active index updated to: ${closestIndex}`) // Debug log
       setActiveIndex(closestIndex)
     }
 
-    const handleScroll = () => {
+    const onScroll = () => {
       if (ticking) return
       ticking = true
-      window.requestAnimationFrame(updateActiveIndex)
+      window.requestAnimationFrame(updateActive)
     }
 
-    updateActiveIndex()
-    window.addEventListener("scroll", handleScroll, { passive: true })
-    window.addEventListener("resize", handleScroll)
+    updateActive()
+    window.addEventListener("scroll", onScroll, { passive: true })
+    window.addEventListener("resize", onScroll)
 
     return () => {
-      window.removeEventListener("scroll", handleScroll)
-      window.removeEventListener("resize", handleScroll)
+      window.removeEventListener("scroll", onScroll)
+      window.removeEventListener("resize", onScroll)
     }
   }, [])
+
+  const effectiveIndex = hoveredIndex ?? activeIndex
 
   return (
     <section
       id="experience"
-      className="scroll-mt-24 px-6 py-20 sm:py-28 bg-white dark:bg-black border-t border-neutral-100 dark:border-neutral-900"
+      style={{ padding: "120px clamp(24px,5vw,80px)", background: "#070810" }}
     >
-      <div className="mx-auto max-w-4xl">
-        <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">
-          Experience
+      <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
+        <SectionLabel number="03" />
+        <h2
+          data-animate
+          data-delay="0.1s"
+          className="font-orbitron"
+          style={{
+            fontSize: "clamp(26px,3.5vw,46px)",
+            fontWeight: 700,
+            color: "#f4f7ff",
+            marginBottom: "70px",
+            letterSpacing: "2px",
+          }}
+        >
+          EXPERIENCE
         </h2>
 
-        <div className="mt-12">
+        <div style={{ position: "relative", paddingLeft: "48px" }}>
           <div
-            ref={(el) => {
-              itemRefs.current[0] = el
+            style={{
+              position: "absolute",
+              left: 0,
+              top: 0,
+              bottom: 0,
+              width: "1px",
+              background:
+                "linear-gradient(#00e5ff55, #1c2440 85%, transparent)",
             }}
-            onMouseEnter={() => setHoveredIndex(0)}
-            onMouseLeave={() => setHoveredIndex(null)}
-          >
-            <ExperienceItem
-              role="Machine Learning Developer"
-              company="AI Student Collective at Davis"
-              period="Oct 2025 - Present"
-              description="Engineering ML-driven trading models on Kalshi, applying supervised learning, time-series forecasting, and feature engineering to predict event probabilities and guide automated trades"
-              isActive={(hoveredIndex ?? activeIndex) === 0}
-            />
-          </div>
-          <div
-            ref={(el) => {
-              itemRefs.current[1] = el
-            }}
-            onMouseEnter={() => setHoveredIndex(1)}
-            onMouseLeave={() => setHoveredIndex(null)}
-          >
-            <ExperienceItem
-              role="Backend Developer"
-              company="Include at Davis"
-              period="Sep 2024 - Oct 2025"
-              description="Constructed scalable, relational NoSQL database schemas for an e-commerce platform serving local businesses, enhancing data integrity, query efficiency, and system scalability. Developed and maintained high-performance database functions and RESTful API endpoints, enabling real-time user interactions and seamless integration between frontend and backend services"
-              isActive={(hoveredIndex ?? activeIndex) === 1}
-            />
-          </div>
-          <div
-            ref={(el) => {
-              itemRefs.current[2] = el
-            }}
-            onMouseEnter={() => setHoveredIndex(2)}
-            onMouseLeave={() => setHoveredIndex(null)}
-          >
-            <ExperienceItem
-              role="Software Engineering Intern"
-              company="AI Nomis"
-              period="July 2024 - Sep 2024"
-              description="Integrated and customized eight open-source AI models on RunPod with cloud GPU computing and linking them via scalable TypeScript/Python APIs to power dynamic AI cards/chatbots. Architected and deployed a full-stack platform enabling users to browse, test, and deploy production-ready AI tools, including a real-time chatbot supporting multiple LLMs. Built a modular, custom AI builder interface for users to visually chain and remix models, connecting inputs, outputs, and logic in a scratch-style system for custom automations"
-              isActive={(hoveredIndex ?? activeIndex) === 2}
-            />
-          </div>
+          />
 
-          <div
-            ref={(el) => {
-              itemRefs.current[3] = el
-            }}
-            onMouseEnter={() => setHoveredIndex(3)}
-            onMouseLeave={() => setHoveredIndex(null)}
-          >
-            <ExperienceItem
-              role="Software Developer"
-              company="Codelab Open Source"
-              period="Feb 2024 - July 2024"
-              description="Collaborated with a team to develop a fully customizable charting library using Ruby on Rails, HTML, and CSS, adding dynamic color palettes, hover interactions, and theme-switching for improved UI/UX. Learned the process of contributing to open-source"
-              isLast
-              isActive={(hoveredIndex ?? activeIndex) === 3}
-            />
-          </div>
+          {JOBS.map((job, i) => {
+            const isActive = effectiveIndex === i
+            return (
+              <div
+                key={job.role}
+                data-animate
+                data-delay={`${0.1 + i * 0.1}s`}
+                ref={(el) => {
+                  itemRefs.current[i] = el
+                }}
+                onMouseEnter={() => setHoveredIndex(i)}
+                onMouseLeave={() => setHoveredIndex(null)}
+                style={{
+                  position: "relative",
+                  marginBottom: i < JOBS.length - 1 ? "56px" : 0,
+                }}
+              >
+                {/* Timeline dot */}
+                <div
+                  style={{
+                    position: "absolute",
+                    left: "-53px",
+                    top: "8px",
+                    width: "13px",
+                    height: "13px",
+                    borderRadius: "50%",
+                    transition: "all 0.35s ease",
+                    ...(isActive
+                      ? {
+                          background: "#00e5ff",
+                          boxShadow:
+                            "0 0 0 4px rgba(0,229,255,0.15), 0 0 14px rgba(0,229,255,0.7)",
+                        }
+                      : {
+                          background: "#0d1020",
+                          border: "2px solid #1c2440",
+                        }),
+                  }}
+                />
+
+                {/* Period */}
+                <div
+                  style={{
+                    fontSize: "10px",
+                    fontWeight: 700,
+                    letterSpacing: "3px",
+                    textTransform: "uppercase",
+                    marginBottom: "10px",
+                    fontFamily: "'Courier New', monospace",
+                    transition: "color 0.35s ease",
+                    color: isActive ? "#00e5ff" : "#657493",
+                  }}
+                >
+                  {job.period}
+                </div>
+
+                {/* Card */}
+                <div
+                  style={{
+                    background: "#0d1020",
+                    padding: "28px 32px",
+                    transition:
+                      "border-color 0.35s ease, box-shadow 0.35s ease",
+                    border: isActive
+                      ? "1px solid rgba(0,229,255,0.3)"
+                      : "1px solid #1c2440",
+                    boxShadow: isActive
+                      ? "0 0 24px rgba(0,229,255,0.04)"
+                      : "none",
+                  }}
+                >
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "baseline",
+                      justifyContent: "space-between",
+                      flexWrap: "wrap",
+                      gap: "12px",
+                      marginBottom: "12px",
+                    }}
+                  >
+                    <h3
+                      className="font-orbitron"
+                      style={{
+                        fontSize: "17px",
+                        fontWeight: 700,
+                        color: "#f4f7ff",
+                        letterSpacing: "1px",
+                      }}
+                    >
+                      {job.role}
+                    </h3>
+                    <span
+                      style={{
+                        fontSize: "13px",
+                        fontWeight: 600,
+                        color: job.companyColor,
+                        letterSpacing: "1px",
+                      }}
+                    >
+                      {job.company}
+                    </span>
+                  </div>
+                  <p
+                    style={{
+                      fontSize: "15px",
+                      color: "#8f9dbb",
+                      lineHeight: 1.75,
+                    }}
+                  >
+                    {job.description}
+                  </p>
+                </div>
+              </div>
+            )
+          })}
         </div>
       </div>
     </section>
+  )
+}
+
+function SectionLabel({ number }: { number: string }) {
+  return (
+    <div
+      data-animate
+      data-delay="0s"
+      style={{
+        display: "flex",
+        alignItems: "center",
+        gap: "14px",
+        marginBottom: "14px",
+      }}
+    >
+      <span
+        style={{
+          fontSize: "11px",
+          fontWeight: 700,
+          color: "#00e5ff",
+          letterSpacing: "5px",
+          fontFamily: "'Space Grotesk', sans-serif",
+        }}
+      >
+        {number}
+      </span>
+      <div style={{ width: "44px", height: "1px", background: "#1c2440" }} />
+    </div>
   )
 }
