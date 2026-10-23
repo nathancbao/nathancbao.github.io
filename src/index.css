@@ -89,6 +89,224 @@ body {
   animation: pulse-glow 6s ease-in-out infinite;
 }
 
+.hero-section {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  background: #070810;
+}
+
+.hero-grid,
+.hero-vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.hero-grid {
+  background-image:
+    linear-gradient(rgba(0, 229, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 229, 255, 0.04) 1px, transparent 1px);
+  background-size: 72px 72px;
+}
+
+.hero-vignette {
+  z-index: 1;
+  background:
+    linear-gradient(90deg, rgba(7, 8, 16, 0) 48%, rgba(7, 8, 16, 0.12) 72%),
+    radial-gradient(
+      ellipse 90% 90% at 28% 100%,
+      rgba(7, 8, 16, 0) 0%,
+      rgba(7, 8, 16, 0.55) 55%,
+      rgba(7, 8, 16, 0.92) 100%
+    );
+}
+
+.hero-copy {
+  position: relative;
+  z-index: 3;
+  width: clamp(280px, 54%, 680px);
+  padding: 0 0 clamp(80px, 12vw, 148px) clamp(24px, 5vw, 80px);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.hero-character {
+  position: absolute;
+  z-index: 2;
+  right: clamp(-78px, -2.5vw, -20px);
+  bottom: 0;
+  width: min(50vw, 720px);
+  height: 93%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.hero-character__halo {
+  position: absolute;
+  left: 50%;
+  top: 47%;
+  width: min(38vw, 540px);
+  aspect-ratio: 1;
+  border: 1px solid rgba(0, 229, 255, 0.13);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, rgba(0, 229, 255, 0.11), transparent 58%),
+    repeating-radial-gradient(
+      circle,
+      transparent 0 58px,
+      rgba(155, 89, 255, 0.07) 59px 60px
+    );
+  box-shadow: 0 0 90px rgba(0, 229, 255, 0.08);
+  transform: translate(-50%, -50%);
+}
+
+.hero-character__image {
+  position: relative;
+  z-index: 2;
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: min(88vh, 860px);
+  object-fit: contain;
+  object-position: center bottom;
+  filter: drop-shadow(0 20px 45px rgba(0, 0, 0, 0.5));
+  transform: translateY(2.5%);
+  animation: hero-character-enter 900ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero-character__label {
+  position: absolute;
+  z-index: 3;
+  color: rgba(0, 229, 255, 0.45);
+  font: 700 8px "Courier New", monospace;
+  letter-spacing: 2px;
+}
+
+.hero-character__label::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 34px;
+  height: 1px;
+  background: rgba(0, 229, 255, 0.24);
+}
+
+.hero-character__label--top {
+  top: 17%;
+  left: 4%;
+}
+
+.hero-character__label--top::before {
+  left: calc(100% + 10px);
+}
+
+.hero-character__label--bottom {
+  right: 14%;
+  bottom: 18%;
+}
+
+.hero-character__label--bottom::before {
+  right: calc(100% + 10px);
+}
+
+.hero-bottom-fade {
+  position: absolute;
+  z-index: 4;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 150px;
+  background: linear-gradient(transparent, #070810);
+  pointer-events: none;
+}
+
+.hero-scroll-indicator {
+  position: absolute;
+  z-index: 5;
+  bottom: 38px;
+  left: clamp(24px, 5vw, 80px);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #52607d;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  opacity: 0.35;
+}
+
+.hero-scroll-indicator__line {
+  width: 1px;
+  height: 50px;
+  background: linear-gradient(transparent, #00e5ff);
+}
+
+@keyframes hero-character-enter {
+  from {
+    opacity: 0;
+    transform: translateY(7%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(2.5%);
+  }
+}
+
+@media (max-width: 920px) {
+  .hero-copy {
+    width: 63%;
+  }
+
+  .hero-character {
+    right: -12%;
+    width: 62vw;
+  }
+
+  .hero-character__label {
+    display: none;
+  }
+}
+
+@media (max-width: 680px) {
+  .hero-section {
+    min-height: 820px;
+  }
+
+  .hero-copy {
+    width: 100%;
+    padding-right: 24px;
+    padding-bottom: 112px;
+  }
+
+  .hero-character {
+    right: -22%;
+    width: 92vw;
+    height: 74%;
+    opacity: 0.22;
+  }
+
+  .hero-character__image {
+    height: min(70vh, 650px);
+  }
+
+  .hero-character__halo {
+    width: 75vw;
+  }
+
+  .hero-vignette {
+    background:
+      linear-gradient(90deg, rgba(7, 8, 16, 0.18), rgba(7, 8, 16, 0.72)),
+      linear-gradient(0deg, rgba(7, 8, 16, 0.2), rgba(7, 8, 16, 0.42));
+  }
+}
+
 @keyframes spin-slow {
   from {
     transform: rotate(0deg);
@@ -525,6 +743,10 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .hero-character__image {
+    animation: none;
+  }
+
   .project-card,
   .project-card__visual,
   .project-card__art,
