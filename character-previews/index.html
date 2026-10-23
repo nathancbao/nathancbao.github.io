@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hero Character Concepts</title>
+    <style>
+      :root {
+        color: #edfaff;
+        background: #05060b;
+        font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        padding: 48px 24px;
+        background:
+          radial-gradient(circle at 20% 0%, #00d9ff18, transparent 35%),
+          radial-gradient(circle at 80% 0%, #a855f718, transparent 35%),
+          #05060b;
+      }
+
+      header {
+        width: min(1180px, 100%);
+        margin: 0 auto 28px;
+      }
+
+      h1 { margin: 0 0 8px; font-size: clamp(1.8rem, 5vw, 3rem); }
+      p { margin: 0; color: #9db1bd; }
+
+      main {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 20px;
+        width: min(1180px, 100%);
+        margin: 0 auto;
+      }
+
+      article {
+        overflow: hidden;
+        border: 1px solid #28d9ff42;
+        border-radius: 18px;
+        background: #0b0e16;
+        box-shadow: 0 16px 55px #0009;
+      }
+
+      article:nth-child(2) { border-color: #a855f766; }
+      article:nth-child(3) { border-color: #28d9ff70; }
+
+      img {
+        display: block;
+        width: 100%;
+        aspect-ratio: 2 / 3;
+        object-fit: cover;
+        object-position: center top;
+      }
+
+      .label { padding: 18px; }
+      h2 { margin: 0 0 5px; font-size: 1.1rem; letter-spacing: .04em; }
+      .label p { font-size: .9rem; }
+
+      @media (max-width: 760px) {
+        body { padding: 28px 16px; }
+        main { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Hero character concepts</h1>
+      <p>Compare the three directions, then choose A, B, or C.</p>
+    </header>
+    <main>
+      <article>
+        <img src="./concept-a.png" alt="Concept A: cel-shaded character with a cat" />
+        <div class="label"><h2>A — Cel-shaded</h2><p>Clean, friendly, and understated.</p></div>
+      </article>
+      <article>
+        <img src="./concept-b.png" alt="Concept B: holographic character with a cat" />
+        <div class="label"><h2>B — Holographic</h2><p>Polished and highly futuristic.</p></div>
+      </article>
+      <article>
+        <img src="./concept-c.png" alt="Concept C: graphic-novel character with a cat" />
+        <div class="label"><h2>C — Graphic novel</h2><p>Bold line art that matches the current site.</p></div>
+      </article>
+    </main>
+  </body>
+</html>
